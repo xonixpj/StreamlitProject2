@@ -1,5 +1,6 @@
 import streamlit as st
 import pickle
+import numpy as np
 from datetime import datetime
 
 startTime = datetime.now()
@@ -29,7 +30,7 @@ def main():
         sibsp_slider = st.slider("# Liczba rodzeństwa i/lub partnera", min_value=0, max_value=8)
         parch_slider = st.slider("# Liczba rodziców i/lub dzieci", min_value=0, max_value=6)
         fare_slider = st.slider("Cena biletu", min_value=0, max_value=500, step=10)
-    data = [[pclass_radio, sex_radio, age_slider, sibsp_slider, parch_slider, fare_slider, embarked_radio]]
+    data = np.array([[pclass_radio, age_slider, sibsp_slider, parch_slider, fare_slider, embarked_radio, sex_radio]])
     survival = model.predict(data)
     s_confidence = model.predict_proba(data)
     with prediction:
